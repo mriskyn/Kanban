@@ -1,0 +1,28 @@
+* {
+    background-color: steelblue;
+}
+
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.card {
+    background: lightgrey;
+    padding: 1em;
+    flex-basis: 20%;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.item {
+    display: grid;
+    border-radius: 5px;
+    background: white;
+    margin: 5px 0;
+    margin-bottom: 10px;
+    padding: 7px;
+    font-weight: normal;
+}
