@@ -1,9 +1,8 @@
 * {
     background-color: steelblue;
-    color: black;
 }
 
-.container {
+.main-page {
     display: flex;
     align-items: flex-start;
     justify-content: space-evenly;
