@@ -64,6 +64,7 @@ new Vue({
                     localStorage.setItem('access_token', user.data.access_token);
                     this.isLogin = true;
                 })
+                .catch(err => console.error(err))
         },
         register() {
             const { first_name, last_name, email, password } = this.input;
@@ -80,6 +81,7 @@ new Vue({
                     this.input.last_name = '';
                     this.form = 'login'
                 })
+                .catch(err => console.error(err))
         },
         showRegister() {
             this.form = 'register'
