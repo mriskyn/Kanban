@@ -2,54 +2,27 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <title>Kanban</title>
 </head>
 
 <body>
     <div class="container">
-        <div class="card">
-            Backlog
-            <div class="item">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, hic!
+        <div class="card" v-for='(category, indexCategory) in categories' :key='indexCategory'>
+            {{ category }}
+            <div class="item" v-for='(task, indexTask) in tasks.filter(task => task.category == category)' :key='task.id'>
+                {{ task.title }}
+                <button @click="deleteTask(task.id)">DELETE</button>
             </div>
-            <div class="item">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, hic!
-            </div>
-            <div class="item">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, hic!
-            </div>
-            <div class="item">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, hic!
-            </div>
-            <div class="item">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatibus, hic!
-            </div>
-        </div>
-        <div class="card">
-            Product
-            <div class="item">
-                Lorem ipsum dolor sit amet.
-            </div>
-            <div class="item">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
-            </div>
-        </div>
-        <div class="card">
-            Development
-        </div>
-        <div class="card">
-            Done
-            <div class="item">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat dignissimos deserunt ut corrupti ad
-                provident. Excepturi ipsam numquam, unde perspiciatis eaque odit consequatur earum voluptates,
-                architecto porro aut. Ab, voluptates.
-            </div>
+            <form v-on:submit.prevent="addTask(category, task.id)">
+                <input type="text" class="add_task" v-model="inputTask[category]">
+                <input type="submit" class="submit_task">
+            </form>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 
 </html>
