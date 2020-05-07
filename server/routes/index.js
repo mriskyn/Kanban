@@ -1,10 +1,9 @@
 const router = require('express').Router();
-const UserController = require('../controllers/UserController');
-const TaskController = require('../controllers/TaskController');
+const taskRouter = require('./taskRoutes');
+const userRouter = require('./userRoutes');
 
-router.post('/login', UserController.login);
-router.get('/tasks', TaskController.read);
-router.post('/tasks', TaskController.create);
-router.delete('/tasks/:id', TaskController.delete);
+
+router.use('/users', userRouter);
+router.use('/tasks', taskRouter);
 
 module.exports = router;
