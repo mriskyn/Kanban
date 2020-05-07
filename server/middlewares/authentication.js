@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
-    const access_token  = req.query.access_token || req.body.access_token;
+    console.log(req.headers)
+    const access_token  = req.headers;
     
     if(!access_token){
         res.status(404).json({ message: 'Invalid token!'});

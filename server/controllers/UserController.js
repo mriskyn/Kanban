@@ -1,24 +1,31 @@
 const { User } = require('../models');
+const bcrypt = require('bcrypt');
+const generateToken = require('../helpers/jwt');
 
 class UserController{
 
     static login(req, res){
+        console.log(req.body)
         const { email, password } = req.body;
 
         User.findOne({
-            where: {
-                email, password
-            }
+            where: { email }
         })
         .then(user => {
-            if(!user){
-                throw new Error('Data is Empty!');
-            } else {
-                res.status(200).json({ message: 'SUCCESS'});
-            }
+            if(!user || !bcrypt.compareSync(password, user.password)){
+                throw {
+                    status: 404, message: 'Wrong email / password!'
+                };
+            } 
+            return user;
+        })
+        .then(user => {
+            const access_token = generateToken(user);
+            res.status(200).json({ access_token });
         })
         .catch(err => {
-            if(err.message.includes('Empty!')){
+            console.log(err);
+            if(err.message){
                 res.status(404).json({message: err.message})
             } else {
                 res.status(500).json({ message: err.message || 'Internal Server Error'});
