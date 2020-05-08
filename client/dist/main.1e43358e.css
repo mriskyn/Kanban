@@ -1,20 +1,17 @@
-*[data-v-65f4ec] {
-  background-color: steelblue;
-}
-.main-page[data-v-65f4ec] {
+.main-page[data-v-aad7e1] {
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
   font-family: Arial, Helvetica, sans-serif;
 }
-.card[data-v-65f4ec] {
+.card[data-v-aad7e1] {
   background: lightgrey;
   padding: 1em;
   flex-basis: 20%;
   border-radius: 5px;
   font-weight: bold;
 }
-.item[data-v-65f4ec] {
+.item[data-v-aad7e1] {
   display: grid;
   border-radius: 5px;
   background: white;
