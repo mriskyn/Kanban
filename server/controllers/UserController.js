@@ -25,8 +25,8 @@ class UserController{
         })
         .catch(err => {
             console.log(err);
-            if(err.message){
-                res.status(404).json({message: err.message})
+            if(err.status){
+                res.status(err.status).json({message: err.message})
             } else {
                 res.status(500).json({ message: err.message || 'Internal Server Error'});
             }
@@ -34,6 +34,7 @@ class UserController{
     }
 
     static register(req, res){
+        console.log(req.body)
         const { first_name, last_name, email, password } = req.body;
 
         User.create({
@@ -43,7 +44,13 @@ class UserController{
             res.status(201).json(user)
         })
         .catch(err => {
-            res.status(500).json({ message: err.message || 'Internal Server Error'});
+            if(err.name === 'SequelizeValidationError'){
+                res.status(400).json({
+                    message: err.message.split(',\n').join(' ')
+                })
+            } else {
+                res.status(500).json({ message: err.message || 'Internal Server Error'});
+            }
         })
     }
 }

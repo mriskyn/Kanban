@@ -7,5 +7,6 @@ router.get('/', TaskController.read);
 router.use(authentication);
 router.post('/', TaskController.create);
 router.delete('/:id', authorization, TaskController.delete);
+router.put('/:id', authorization, TaskController.update);
 
 module.exports = router;
