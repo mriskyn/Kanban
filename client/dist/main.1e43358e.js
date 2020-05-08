@@ -10680,6 +10680,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ["tasks"],
   data: function data() {
@@ -10756,23 +10765,33 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "main-page" },
-    [
+  return _c("div", { staticClass: "main-page" }, [
+    _c("header", [
+      _c("div"),
+      _vm._v(" "),
+      _c("nav", [_vm._v("\n            KANBAN\n        ")]),
+      _vm._v(" "),
+      _c("button", { attrs: { type: "button" }, on: { click: _vm.logout } }, [
+        _vm._v("Logout")
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "content" },
       _vm._l(_vm.categories, function(category, indexCategory) {
         return _c(
           "div",
           { key: indexCategory, staticClass: "card" },
           [
-            _vm._v("\n    " + _vm._s(category) + "\n    "),
+            _vm._v("\n      " + _vm._s(category) + "\n      "),
             _vm._l(
               _vm.tasks.filter(function(task) {
                 return task.category == category
               }),
               function(task) {
                 return _c("div", { key: task.id, staticClass: "item" }, [
-                  _vm._v("\n      " + _vm._s(task.title) + "\n      "),
+                  _vm._v("\n        " + _vm._s(task.title) + "\n        "),
                   _c(
                     "button",
                     {
@@ -10831,13 +10850,9 @@ exports.default = _default;
           2
         )
       }),
-      _vm._v(" "),
-      _c("button", { attrs: { type: "button" }, on: { click: _vm.logout } }, [
-        _vm._v("Logout")
-      ])
-    ],
-    2
-  )
+      0
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -10921,6 +10936,51 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// let x = document.getElementById('login')
+// let y = document.getElementById('register')
+// let z = document.getElementById('btn')
+// function register(){
+//     x.style.left = '-480px';
+//     y.style.left = '50px';
+//     z.style.left = '110px';
+// }
+// function login(){
+//     x.style.left = '50px';
+//     y.style.left = '450px';
+//     z.style.left = '0px'
+// }
 var _default = {
   props: ["isLogin"],
   data: function data() {
@@ -10952,7 +11012,7 @@ var _default = {
         _this.input.password_login = "";
         localStorage.setItem("access_token", user.data.access_token);
 
-        _this.$emit('childToParent', true);
+        _this.$emit('changeToLogin', true);
       }).catch(function (err) {
         return console.error(err);
       });
@@ -10987,6 +11047,9 @@ var _default = {
     },
     showRegister: function showRegister() {
       this.form = "register";
+    },
+    showLogin: function showLogin() {
+      this;
     }
   }
 };
@@ -11004,198 +11067,249 @@ exports.default = _default;
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "login-page" }, [
-    _vm.form === "login"
-      ? _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.login($event)
+    _c("div", { staticClass: "hero" }, [
+      _c("div", { staticClass: "form-box" }, [
+        _c("div", { staticClass: "button-box" }, [
+          _c("div", { attrs: { id: "btn" } }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "toogle-btn",
+              on: {
+                click: function($event) {
+                  _vm.form = "login"
+                }
               }
-            }
-          },
-          [
-            _c("div", { staticClass: "login" }, [
-              _c("label", [_vm._v("Email")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input.email_login,
-                    expression: "input.email_login"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.input.email_login },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.input, "email_login", $event.target.value)
-                  }
+            },
+            [_vm._v("Login")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "toogle-btn",
+              on: {
+                click: function($event) {
+                  _vm.form = "register"
                 }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", [_vm._v("Password")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input.password_login,
-                    expression: "input.password_login"
-                  }
-                ],
-                attrs: { type: "password" },
-                domProps: { value: _vm.input.password_login },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.input, "password_login", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", { attrs: { type: "submit" } }),
-              _vm._v(" "),
-              _c(
-                "button",
-                { attrs: { type: "button" }, on: { click: _vm.showRegister } },
-                [_vm._v("Register")]
-              )
-            ])
-          ]
-        )
-      : _c(
-          "form",
-          {
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.register($event)
               }
-            }
-          },
-          [
-            _c("div", { staticClass: "register" }, [
-              _c("label", [_vm._v("First Name")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input.first_name,
-                    expression: "input.first_name"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.input.first_name },
+            },
+            [_vm._v("Register")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _vm.form === "login"
+          ? _c(
+              "form",
+              {
+                staticClass: "input-group",
+                attrs: { id: "login" },
                 on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.input, "first_name", $event.target.value)
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.login($event)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", [_vm._v("Last Name")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input.last_name,
-                    expression: "input.last_name"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.input.last_name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input.email_login,
+                      expression: "input.email_login"
                     }
-                    _vm.$set(_vm.input, "last_name", $event.target.value)
+                  ],
+                  staticClass: "input-field",
+                  attrs: { type: "text", placeholder: "Email" },
+                  domProps: { value: _vm.input.email_login },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.input, "email_login", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input.password_login,
+                      expression: "input.password_login"
+                    }
+                  ],
+                  staticClass: "input-field",
+                  attrs: { type: "password", placeholder: "Password" },
+                  domProps: { value: _vm.input.password_login },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.input, "password_login", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "check-box",
+                  attrs: { type: "checkbox", name: "checkbox" }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "checkbox" } }, [
+                  _vm._v("Remeber Password")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "submit-btn", attrs: { type: "submit" } },
+                  [_vm._v("Login")]
+                )
+              ]
+            )
+          : _c(
+              "form",
+              {
+                staticClass: "input-group",
+                attrs: { id: "register" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.register($event)
                   }
                 }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", [_vm._v("Email")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input.email,
-                    expression: "input.email"
-                  }
-                ],
-                attrs: { type: "text" },
-                domProps: { value: _vm.input.email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+              },
+              [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input.first_name,
+                      expression: "input.first_name"
                     }
-                    _vm.$set(_vm.input, "email", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("label", [_vm._v("Password")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.input.password,
-                    expression: "input.password"
-                  }
-                ],
-                attrs: { type: "password" },
-                domProps: { value: _vm.input.password },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ],
+                  staticClass: "input-field",
+                  attrs: { type: "text", placeholder: "First Name" },
+                  domProps: { value: _vm.input.first_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.input, "first_name", $event.target.value)
                     }
-                    _vm.$set(_vm.input, "password", $event.target.value)
                   }
-                }
-              }),
-              _vm._v(" "),
-              _c("br"),
-              _vm._v(" "),
-              _c("input", { attrs: { type: "submit" } })
-            ])
-          ]
-        )
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input.last_name,
+                      expression: "input.last_name"
+                    }
+                  ],
+                  staticClass: "input-field",
+                  attrs: { type: "text", placeholder: "Last Name" },
+                  domProps: { value: _vm.input.last_name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.input, "last_name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input.email,
+                      expression: "input.email"
+                    }
+                  ],
+                  staticClass: "input-field",
+                  attrs: { type: "text", placeholder: "Email" },
+                  domProps: { value: _vm.input.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.input, "email", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.input.password,
+                      expression: "input.password"
+                    }
+                  ],
+                  staticClass: "input-field",
+                  attrs: { type: "password", placeholder: "Password" },
+                  domProps: { value: _vm.input.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.input, "password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "check-box",
+                  attrs: { type: "checkbox", name: "checkbox" }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "checkbox" } }, [
+                  _vm._v("I agree with the Terms and Conditions")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  { staticClass: "submit-btn", attrs: { type: "submit" } },
+                  [_vm._v("Register")]
+                )
+              ]
+            )
+      ])
+    ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "social-icons" }, [
+      _c("img", { attrs: { src: "https://i.imgur.com/uDrCiij.png" } }),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "https://i.imgur.com/hPMvYI3.png" } }),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "https://i.imgur.com/XArGSwe.png" } })
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -11253,40 +11367,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default = {
   components: {
     MainPage: _MainPage.default,
@@ -11313,44 +11393,7 @@ var _default = {
     },
     logout: function logout(value) {
       this.isLogin = value; // change to false
-    } // login() {
-    //   axios({
-    //     method: "POST",
-    //     url: "http://localhost:3000/users/login",
-    //     data: {
-    //       email: this.input.email_login,
-    //       password: this.input.password_login
-    //     }
-    //   })
-    //     .then(user => {
-    //       this.input.email_login = "";
-    //       this.input.password_login = "";
-    //       localStorage.setItem("access_token", user.data.access_token);
-    //       this.isLogin = true;
-    //     })
-    //     .catch(err => console.error(err));
-    // },
-    // register() {
-    //   const { first_name, last_name, email, password } = this.input;
-    //   axios({
-    //     method: "POST",
-    //     url: "http://localhost:3000/users/register",
-    //     data: { first_name, last_name, email, password }
-    //   })
-    //     .then(user => {
-    //       console.log(user);
-    //       this.input.email = "";
-    //       this.input.password = "";
-    //       this.input.first_name = "";
-    //       this.input.last_name = "";
-    //       this.form = "login";
-    //     })
-    //     .catch(err => console.error(err));
-    // },
-    // showRegister() {
-    //   this.form = "register";
-    // }
-
+    }
   },
   created: function created() {
     var _this = this;
@@ -11388,7 +11431,7 @@ exports.default = _default;
       !_vm.isLogin
         ? _c("SignPage", {
             attrs: { isLogin: _vm.isLogin },
-            on: { childToParent: _vm.login }
+            on: { changeToLogin: _vm.login }
           })
         : _c("MainPage", {
             attrs: { tasks: _vm.tasks },
@@ -11440,6 +11483,10 @@ var _App = _interopRequireDefault(require("./App.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
+// import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap-vue/dist/bootstrap-vue.css';
+// Vue.use(BootstrapVue);
 new _vue.default({
   el: '#app',
   render: function render(h) {
@@ -11474,7 +11521,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59723" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58776" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

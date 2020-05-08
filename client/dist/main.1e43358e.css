@@ -1,4 +1,31 @@
-.main-page[data-v-aad7e1] {
+header[data-v-aad7e1] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    box-sizing: border-box;
+    background-color: #24252A;
+}
+header > nav[data-v-aad7e1], header > button[data-v-aad7e1]{
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+header > button[data-v-aad7e1] {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s
+}
+header > button[data-v-aad7e1]:hover{
+    background-color: rgba(0, 136, 169, 0.8)
+}
+.content[data-v-aad7e1] {
+  padding: 10px;
+  margin: 10px;
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
@@ -20,3 +47,103 @@
   padding: 7px;
   font-weight: normal;
 }
+.hero[data-v-50fdc4] {
+    height: 100%;
+    width: 100%;
+    background-image: url('https://thumbs.dreamstime.com/b/minimalist-architect-designer-concept-table-desk-chair-kitchen-office-lamps-striped-wallpaper-background-blue-pa-118312651.jpg');
+    background-position: center;
+    background-size: cover;
+    position: absolute
+}
+.form-box[data-v-50fdc4] {
+    width: 380px;
+    height: 480px;
+    position: relative;
+    margin: 6% auto;
+    background: rgb(226, 226, 226);
+    padding: 5px;
+    overflow: hidden;
+    box-shadow: 0 14px 20px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 3px;
+}
+.button-box[data-v-50fdc4] {
+    width: 220px;
+    margin: 35px auto;
+    position: relative;
+    box-shadow: 0 0 20px 9px bisque;
+    border-radius: 30px;
+}
+.toogle-btn[data-v-50fdc4] {
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+}
+#btn[data-v-50fdc4]{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(2,25,168,0.4500175070028011) 0%, rgba(24,181,233,1) 52%, rgba(0,212,255,1) 100%);
+    border-radius: 50px;
+    transition: .5s;
+}
+.social-icons[data-v-50fdc4] {
+    margin: 30px auto;
+    text-align: center;
+}
+.social-icons img[data-v-50fdc4] {
+    width: 35px;
+    margin: 0 12px;
+    box-shadow: 0 0 20px 0 #7f7f7f3d;
+    cursor: pointer;
+    border-radius: 50%
+}
+.input-group[data-v-50fdc4] {
+    top: 180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s;
+}
+.input-field[data-v-50fdc4]{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #999;
+    outline: none;
+    background: transparent;
+}
+.submit-btn[data-v-50fdc4]{
+    widows: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    background: linear-gradient(90deg, rgba(2,25,168,0.4500175070028011) 0%, rgba(24,181,233,1) 52%, rgba(0,212,255,1) 100%);
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+}
+.check-box[data-v-50fdc4]{
+    margin: 30px 3px 30px 0;
+}
+label[data-v-50fdc4]{
+    color: #777;
+    font-size: 12px;
+    bottom: 68px;
+}
+#login[data-v-50fdc4]{
+    left: 50px;
+}
+#register[data-v-50fdc4]{
+    left: 50px;
+}
+/* .container {
+  background-color: red
+} */

@@ -1,21 +1,30 @@
 <template>
   <div class="main-page">
-    <div class="card" v-for="(category, indexCategory) in categories" :key="indexCategory">
-      {{ category }}
-      <div
-        class="item"
-        v-for="task in tasks.filter(task => task.category == category)"
-        :key="task.id"
-      >
-        {{ task.title }}
-        <button @click="deleteTask(task.id)">DELETE</button>
+      <header>
+          <div></div>
+          <nav>
+              KANBAN
+          </nav>
+          <button type="button" @click="logout">Logout</button>
+    </header>
+    <div class="content">
+      <div class="card" v-for="(category, indexCategory) in categories" :key="indexCategory">
+        {{ category }}
+        <div
+          class="item"
+          v-for="task in tasks.filter(task => task.category == category)"
+          :key="task.id"
+        >
+          {{ task.title }}
+          <button @click="deleteTask(task.id)">DELETE</button>
+        </div>
+        <form v-on:submit.prevent="addTask(category)">
+          <input type="text" class="add_task" v-model="inputTask[category]" />
+          <input type="submit" class="submit_task" />
+        </form>
       </div>
-      <form v-on:submit.prevent="addTask(category)">
-        <input type="text" class="add_task" v-model="inputTask[category]" />
-        <input type="submit" class="submit_task" />
-      </form>
     </div>
-    <button type="button" @click="logout">Logout</button>
+    
   </div>
 </template>
 
@@ -83,7 +92,37 @@ export default {
 </script>
 
 <style scoped>
-.main-page {
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    box-sizing: border-box;
+    background-color: #24252A;
+}
+
+header > nav, header > button{
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+header > button {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s 
+}
+
+header > button:hover{
+    background-color: rgba(0, 136, 169, 0.8)
+}
+.content {
+  padding: 10px;
+  margin: 10px;
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
