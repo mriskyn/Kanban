@@ -10654,6 +10654,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -10692,10 +10697,13 @@ var _default = {
     deleteTask: function deleteTask(id) {
       var _this = this;
 
-      axios({
+      (0, _axios.default)({
         method: "DELETE",
-        url: "http://localhost:3000/tasks/".concat(id)
-      }).then(function (task) {
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      }).then(function () {
         _this.tasks.forEach(function (task, i) {
           if (task.id === id) {
             _this.tasks.splice(i, 1);
@@ -10705,26 +10713,33 @@ var _default = {
         return console.error(err);
       });
     },
-    addTask: function addTask(category, id) {
+    addTask: function addTask(category) {
       var _this2 = this;
 
-      axios.post("http://localhost:3000/tasks", {
-        title: this.inputTask[category],
-        category: category
-      }).then(function (task) {
-        _this2.tasks.push({
-          id: id,
-          title: _this2.inputTask[category],
+      (0, _axios.default)({
+        method: "POST",
+        url: "http://localhost:3000/tasks",
+        data: {
+          title: this.inputTask[category],
           category: category
+        },
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      }).then(function (task) {
+        console.log(task.data);
+
+        _this2.tasks.push({
+          id: task.data.id,
+          title: task.data.title,
+          category: task.data.category
         });
-      }).catch(function (err) {
-        return console.error(err);
       });
       this.inputTask[category] = "";
     },
     logout: function logout() {
       localStorage.removeItem("access_token");
-      this.$emit('changeToLogout', false);
+      this.$emit("changeToLogout", false);
     }
   }
 };
@@ -10779,7 +10794,7 @@ exports.default = _default;
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.addTask(category, _vm.task.id)
+                    return _vm.addTask(category)
                   }
                 }
               },
@@ -10857,7 +10872,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/SignPage.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","_css_loader":"../../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/SignPage.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10935,7 +10950,7 @@ var _default = {
       }).then(function (user) {
         _this.input.email_login = "";
         _this.input.password_login = "";
-        localStorage.setItem("access_token", user.data.access_token); //   this.isLogin = true;
+        localStorage.setItem("access_token", user.data.access_token);
 
         _this.$emit('childToParent', true);
       }).catch(function (err) {

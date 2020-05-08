@@ -67,7 +67,6 @@ export default {
           this.input.email_login = "";
           this.input.password_login = "";
           localStorage.setItem("access_token", user.data.access_token);
-          //   this.isLogin = true;
           this.$emit('childToParent', true);
         })
         .catch(err => console.error(err));

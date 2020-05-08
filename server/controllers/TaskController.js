@@ -14,14 +14,15 @@ class TaskController {
 
     static create(req, res) {
         const { title, category } = req.body;
+        const UserId = req.user.id;
         const createdAt = new Date();
         const updatedAt = new Date();
 
         Task.create({
-            title, category, createdAt, updatedAt
+            title, category, createdAt, updatedAt, UserId
         })
             .then(task => {
-                res.status(201).json({ title, category });
+                res.status(201).json(task );
             })
             .catch(err => {
                 res.status(500).json({ message: err.message || 'Internal Server Error' });
@@ -30,10 +31,14 @@ class TaskController {
 
     static delete(req, res) {
         const { id } = req.params;
-
-        Task.destroy({ where: { id } })
+        let taskToClient;
+        Task.findOne({ where: { id } })
             .then(task => {
-                res.status(200).json({ message: `delete task with id ${id}` })
+                taskToClient = task;
+                return Task.destroy({ where: { id }})
+            })
+            .then(deletedTask => {
+                res.status(200).json(taskToClient)
             })
             .catch(err => {
                 res.status(500).json({ message: err.message || 'Internal Server Error' });

@@ -10,7 +10,7 @@
         {{ task.title }}
         <button @click="deleteTask(task.id)">DELETE</button>
       </div>
-      <form v-on:submit.prevent="addTask(category, task.id)">
+      <form v-on:submit.prevent="addTask(category)">
         <input type="text" class="add_task" v-model="inputTask[category]" />
         <input type="submit" class="submit_task" />
       </form>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: ["tasks"],
   data() {
@@ -37,9 +39,12 @@ export default {
     deleteTask(id) {
       axios({
         method: "DELETE",
-        url: `http://localhost:3000/tasks/${id}`
+        url: `http://localhost:3000/tasks/${id}`,
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
       })
-        .then(task => {
+        .then(() => {
           this.tasks.forEach((task, i) => {
             if (task.id === id) {
               this.tasks.splice(i, 1);
@@ -48,25 +53,30 @@ export default {
         })
         .catch(err => console.error(err));
     },
-    addTask(category, id) {
-      axios
-        .post("http://localhost:3000/tasks", {
+    addTask(category) {
+      axios({
+        method: "POST",
+        url: "http://localhost:3000/tasks",
+        data: {
           title: this.inputTask[category],
           category
-        })
-        .then(task => {
-          this.tasks.push({
-            id,
-            title: this.inputTask[category],
-            category: category
-          });
-        })
-        .catch(err => console.error(err));
+        },
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      }).then(task => {
+        console.log(task.data);
+        this.tasks.push({
+          id: task.data.id,
+          title: task.data.title,
+          category: task.data.category
+        });
+      });
       this.inputTask[category] = "";
     },
     logout() {
       localStorage.removeItem("access_token");
-      this.$emit('changeToLogout', false)
+      this.$emit("changeToLogout", false);
     }
   }
 };
