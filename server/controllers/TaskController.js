@@ -1,9 +1,11 @@
-const { Task } = require('../models');
+const { Task, User } = require('../models');
 
 class TaskController {
 
     static read(req, res) {
-        Task.findAll()
+        Task.findAll({
+            include: User
+        })
             .then(tasks => {
                 res.status(200).json(tasks);
             })
@@ -20,6 +22,16 @@ class TaskController {
             title, category, UserId
         })
             .then(task => {
+                if(task) {
+                    return Task.findAll({
+                        include: User,
+                        where: { id: task.id }
+                    })
+                } else {
+                    res.status(400).json({ message: 'Bad Request'});
+                }
+            })
+            .then(task => {
                 res.status(201).json(task);
             })
             .catch(err => {
@@ -32,7 +44,23 @@ class TaskController {
     }
 
     static update(req, res){
+        const { title, category } = req.body;
+        const { id } = req.params;
 
+        Task.update({ title, category }, { where: {id}})
+            .then(() => {
+                // res.status(200).json(task);
+                return Task.findAll({
+                    where: {id},
+                    include: User
+                });
+            })
+            .then(task => {
+                res.status(200).json(task);
+            })
+            .catch(err => {
+                res.status(500).json({ message: err.message || 'Internal Server Error' });
+            })
     }
 
     static delete(req, res) {

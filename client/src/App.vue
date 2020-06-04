@@ -1,24 +1,24 @@
 <template>
   <div class="container">
-    <SignPage :isLogin='isLogin' v-on:changeToLogin='login' v-if='!isLogin'></SignPage>
-    
-    <MainPage v-on:changeToLogout='logout' :tasks='tasks' v-else> </MainPage>
+    <SignPage :isLogin="isLogin" v-on:changeToLogin="login" v-if="!isLogin"></SignPage>
+
+    <MainPage v-on:changeToLogout="logout" v-else></MainPage>
   </div>
 </template>
 
 
 <script>
 import axios from "axios";
-import MainPage from './components/MainPage'
-import SignPage from './components/SignPage'
+import MainPage from "./components/MainPage";
+import SignPage from "./components/SignPage";
 
 export default {
   components: {
-    MainPage, SignPage
+    MainPage,
+    SignPage
   },
   data() {
     return {
-      tasks: [],
       form: "login",
       isLogin: false || localStorage.getItem("access_token"),
       input: {
@@ -32,31 +32,12 @@ export default {
     };
   },
   methods: {
-    login(value){
-      this.isLogin = value // change to true
+    login(value) {
+      this.isLogin = value; // change to true
     },
-    logout(value){
-      this.isLogin = value // change to false
+    logout(value) {
+      this.isLogin = value; // change to false
     }
-  },
-  created() {
-    axios({
-      method: "GET",
-      url: "http://localhost:3000/tasks"
-    })
-      .then(tasks => {
-        console.log(tasks);
-        tasks.data.forEach(tasks => {
-          this.tasks.push(tasks);
-        });
-      })
-      .catch(err => console.error(err));
   }
 };
 </script>
-
-<style scoped>
-/* .container {
-  background-color: red
-} */
-</style>

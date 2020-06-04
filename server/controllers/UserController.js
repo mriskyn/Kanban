@@ -1,6 +1,6 @@
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
-const generateToken = require('../helpers/jwt');
+const { generateToken } = require('../helpers/jwt');
+const { verifyPassword } = require('../helpers/bcrypt');
 
 class UserController{
 
@@ -12,7 +12,7 @@ class UserController{
             where: { email }
         })
         .then(user => {
-            if(!user || !bcrypt.compareSync(password, user.password)){
+            if(!user || !verifyPassword(password, user.password)){
                 throw {
                     status: 404, message: 'Wrong email / password!'
                 };

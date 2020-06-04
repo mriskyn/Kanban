@@ -6,6 +6,13 @@ import App from './App.vue'
 // import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 // Vue.use(BootstrapVue);
+import GAuth from 'vue-google-oauth2'
+
+const gauthOption = {
+  clientId: '172260467005-fh9o96g78cjq092qnbca32hii2i43286.apps.googleusercontent.com'
+}
+
+// Vue.use(GAuth, gauthOption)
 
 new Vue({
     el: '#app',

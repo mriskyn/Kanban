@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+const { verifyToken } = require('../helpers/jwt');
 
 module.exports = (req, res, next) => {
     const { access_token } = req.headers;
@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         res.status(404).json({ message: 'Invalid token!'});
     } else {
         try{
-            const decoded = jwt.verify(access_token, 'h8');
+            const decoded = verifyToken(access_token);
             req.user = decoded;
             next();
         }
