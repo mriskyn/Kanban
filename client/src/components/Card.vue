@@ -34,8 +34,6 @@ export default {
   data() {
     return {
       tasks: [],
-      //   categories: ["backlog", "todo", "done", "completed"],
-      //   errorMsg: '',
       editedTask: {},
       inputTask: {
         backlog: "",
@@ -49,7 +47,7 @@ export default {
     addTask(category) {
       axios({
         method: "POST",
-        url: "http://localhost:3000/tasks",
+        url: "https://kanban-hacktiv8-prime-fox.herokuapp.com/tasks",
         data: {
           title: this.inputTask[category],
           category
@@ -87,7 +85,7 @@ export default {
   created() {
     axios({
       method: "GET",
-      url: "http://localhost:3000/tasks"
+      url: "https://kanban-hacktiv8-prime-fox.herokuapp.com/tasks"
     })
       .then(res => {
         res.data.forEach(task => {

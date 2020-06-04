@@ -71,7 +71,7 @@ export default {
     login() {
       axios({
         method: "POST",
-        url: "http://localhost:3000/users/login",
+        url: "https://kanban-hacktiv8-prime-fox.herokuapp.com/users/login",
         data: {
           email: this.input.email_login,
           password: this.input.password_login
@@ -86,9 +86,14 @@ export default {
         .catch(err => {
           if(this.input.email_login === '') {
             this.errorMsg += 'Email is Empty! ';
+          } else if(!this.input.email_login.includes('@') || !this.input.email_login.includes('.com')) {
+            this.errorMsg += 'Use Email Format! ';
           }
           if(this.input.password_login === '') {
             this.errorMsg += 'Password is Empty! ';
+          }
+          if(this.errorMsg === '') {
+            this.errorMsg = 'Wrong Username / Password'
           }
           setTimeout(() => {
               this.errorMsg = "";
@@ -100,7 +105,7 @@ export default {
       const { first_name, last_name, email, password } = this.input;
       axios({
         method: "POST",
-        url: "http://localhost:3000/users/register",
+        url: "https://kanban-hacktiv8-prime-fox.herokuapp.com/users/register",
         data: { first_name, last_name, email, password }
       })
         .then(user => {
@@ -114,6 +119,8 @@ export default {
         .catch(err => {
           if(this.input.email === '') {
             this.errorMsg += 'Email is Empty! ';
+          } else if(!this.input.email.includes('@') || !this.input.email.includes('.com')) {
+            this.errorMsg += 'Use Email Format! ';
           }
           if(this.input.password === '') {
             this.errorMsg += 'Password is Empty! ';

@@ -40,7 +40,7 @@ export default {
     deleteTask(id) {
       axios({
         method: "DELETE",
-        url: `http://localhost:3000/tasks/${id}`,
+        url: `https://kanban-hacktiv8-prime-fox.herokuapp.com/tasks/${id}`,
         headers: {
           access_token: localStorage.getItem("access_token")
         }
@@ -63,7 +63,7 @@ export default {
       const { title, category } = this;
       axios({
         method: "PUT",
-        url: `http://localhost:3000/tasks/${id}`,
+        url: `https://kanban-hacktiv8-prime-fox.herokuapp.com/tasks/${id}`,
         headers: {
           access_token: localStorage.getItem("access_token")
         },
