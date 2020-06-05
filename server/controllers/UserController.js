@@ -41,7 +41,11 @@ class UserController{
             first_name, last_name, email, password
         })
         .then(user => {
-            res.status(201).json(user)
+            res.status(201).json({
+                email: user.email,
+                firs_name: user.first_name,
+                last_name: user.last_name
+            })
         })
         .catch(err => {
             if(err.name === 'SequelizeValidationError'){

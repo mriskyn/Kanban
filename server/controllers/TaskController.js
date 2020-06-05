@@ -49,7 +49,6 @@ class TaskController {
 
         Task.update({ title, category }, { where: {id}})
             .then(() => {
-                // res.status(200).json(task);
                 return Task.findAll({
                     where: {id},
                     include: User
